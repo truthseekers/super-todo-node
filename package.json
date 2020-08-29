@@ -1,0 +1,15 @@
+{
+  "name": "super-todo-node",
+  "version": "1.0.0",
+  "description": "Welcome to the GraphQL tutorial series.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  }
+}
