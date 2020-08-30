@@ -1,4 +1,6 @@
 const { GraphQLServer } = require("graphql-yoga");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 let users = [
   {
@@ -30,9 +32,9 @@ type User {
 const resolvers = {
   Query: {
     helloWorld: () => `Hello World! What a day!`,
-    // users: () => users, // We could do this since it's such a simple query
-    users: (parent, args, context, info) => {
-      return users;
+    users: async (parent, args, context, info) => {
+      console.log(context);
+      return context.prisma.user.findMany();
     },
     user: (parent, args, context, info) => {
       return users.find((user) => {
@@ -56,6 +58,9 @@ const resolvers = {
 const server = new GraphQLServer({
   typeDefs,
   resolvers,
+  context: {
+    prisma,
+  },
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
 //
